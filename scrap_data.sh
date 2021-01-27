@@ -41,12 +41,12 @@ fi
 
 pokemon_images=$(
 	cat "$scrap_folder/$bulbapedia_page_name" | \
-	sed -nr 's;^.*<img alt="(.*)" src="(http://cdn.bulbagarden.net/upload/.*\.png)" width="40" height="40" />.*$;\1=\2;p' \
+	sed -nr 's;^.*<img alt="(.*)" src="(//cdn.bulbagarden.net/upload/.*\.png)" width="68" height="68" />.*$;\1=\2;p' \
 )
 
 for line in $pokemon_images; do
 	pokemon_name="${line%=*}"
-	pokemon_url="${line#*=}"
+	pokemon_url="https:${line#*=}"
 
 	# Unescape HTML characters... Damn "Farfetch&#39;d".
 	pokemon_name=$(echo "$pokemon_name" | sed "s/&#39;/'/")
